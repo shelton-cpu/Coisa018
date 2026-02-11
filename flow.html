@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="pt">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Morina</title>
+
+  <link rel="stylesheet" href="assets/css/reset.css" />
+  <link rel="stylesheet" href="assets/css/base.css" />
+  <link rel="stylesheet" href="assets/css/flow.css" />
+</head>
+
+<body class="page page--flow">
+  <canvas id="sky" aria-hidden="true"></canvas>
+  <div class="aurora" aria-hidden="true"></div>
+
+  <!-- Barra discreta -->
+  <header class="topbar" aria-label="Progresso">
+    <div class="topbar__left">
+      <span class="topbar__dot" aria-hidden="true"></span>
+      <span class="topbar__label" id="progressLabel">Começo</span>
+    </div>
+
+    <button class="topbar__sound" type="button" id="soundToggle" aria-pressed="false">
+      Som: Off
+    </button>
+  </header>
+
+  <main class="flow" role="main" aria-label="Percurso">
+    <section class="screens" id="screens">
+
+      <!-- TELA 1 -->
+      <section class="screen screen--identity is-active" data-screen="1" aria-label="Identidade">
+        <div class="screen__content">
+          <h2 class="screen__title">Três nomes. Uma pessoa.</h2>
+          <p class="screen__subtitle">Clica no que te representa hoje.</p>
+
+          <div class="cards cards--triple" role="list">
+            <button class="card" type="button" data-pick="morina" role="listitem">
+              <h3 class="card__title">Morina</h3>
+              <p class="card__text">a que sente em silêncio</p>
+            </button>
+
+            <button class="card" type="button" data-pick="coisa" role="listitem">
+              <h3 class="card__title">Coisa</h3>
+              <p class="card__text">a que ri e bagunça</p>
+            </button>
+
+            <button class="card" type="button" data-pick="jp" role="listitem">
+              <h3 class="card__title">モリナ🤗</h3>
+              <p class="card__text">a que acolhe</p>
+            </button>
+          </div>
+
+          <div class="screen__actions">
+            <button class="btn btn--primary" type="button" data-next>Continuar</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- TELA 2 -->
+      <section class="screen screen--quiz" data-screen="2" aria-label="Perguntas sobre ti">
+        <div class="screen__content">
+          <h2 class="screen__title">Sobre ti. Do teu jeito.</h2>
+          <p class="screen__subtitle">Sem responder bonito. Só escolhe verdadeiro.</p>
+
+          <form class="quiz" id="quizForm">
+            <fieldset class="quiz__q" data-q="1">
+              <legend class="quiz__legend">Quando tu estás bem de verdade, tu ficas mais…</legend>
+              <div class="quiz__choices">
+                <button class="choice" type="button" data-answer="calma">Calma</button>
+                <button class="choice" type="button" data-answer="leve">Leve</button>
+                <button class="choice" type="button" data-answer="risonha">Risonha</button>
+              </div>
+            </fieldset>
+
+            <fieldset class="quiz__q" data-q="2" hidden>
+              <legend class="quiz__legend">O que tu preferes quando estás cansada?</legend>
+              <div class="quiz__choices">
+                <button class="choice" type="button" data-answer="silencio">Silêncio</button>
+                <button class="choice" type="button" data-answer="companhia">Companhia</button>
+                <button class="choice" type="button" data-answer="distancia">Distância só um pouco</button>
+              </div>
+            </fieldset>
+
+            <fieldset class="quiz__q" data-q="3" hidden>
+              <legend class="quiz__legend">O que mais te descreve?</legend>
+              <div class="quiz__choices">
+                <button class="choice" type="button" data-answer="cuidado">Cuidado</button>
+                <button class="choice" type="button" data-answer="coragem">Coragem</button>
+                <button class="choice" type="button" data-answer="fe">Fé</button>
+              </div>
+            </fieldset>
+
+            <fieldset class="quiz__q" data-q="4" hidden>
+              <legend class="quiz__legend">Quando alguém te magoa, tu…</legend>
+              <div class="quiz__choices">
+                <button class="choice" type="button" data-answer="fica_quieta">Ficas quieta</button>
+                <button class="choice" type="button" data-answer="perdoa">Perdoas, mas lembras</button>
+                <button class="choice" type="button" data-answer="corta">Cortas aos poucos</button>
+              </div>
+            </fieldset>
+
+            <fieldset class="quiz__q" data-q="5" hidden>
+              <legend class="quiz__legend">O que te faz sentir amada?</legend>
+              <div class="quiz__choices">
+                <button class="choice" type="button" data-answer="palavras">Palavras certas</button>
+                <button class="choice" type="button" data-answer="presenca">Presença</button>
+                <button class="choice" type="button" data-answer="cuidado_simples">Cuidado simples</button>
+              </div>
+            </fieldset>
+
+            <fieldset class="quiz__q" data-q="6" hidden>
+              <legend class="quiz__legend">E o “7”… quando tu vês esse número invertido, sentes…</legend>
+              <div class="quiz__choices">
+                <button class="choice" type="button" data-answer="paz">Paz</button>
+                <button class="choice" type="button" data-answer="sinal">Sinal</button>
+                <button class="choice" type="button" data-answer="memoria">Uma memória boa</button>
+              </div>
+            </fieldset>
+
+            <div class="screen__actions">
+              <button class="btn btn--primary" type="button" disabled id="quizNext">
+                Avançar
+              </button>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <!-- TELA 3 -->
+      <section class="screen screen--mist" data-screen="3" aria-label="O que pensam">
+        <div class="screen__content">
+          <h2 class="screen__title">O que pensam de ti…</h2>
+
+          <div class="mist" aria-live="polite">
+            <p class="mist__line">“Que és só brincadeira.”</p>
+            <p class="mist__line">“Que estás sempre bem.”</p>
+            <p class="mist__line">“Que rir demais é falta de cabeça.”</p>
+          </div>
+
+          <div class="screen__actions">
+            <button class="btn btn--ghost" type="button" data-next>Continuar</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- TELA 4 -->
+      <section class="screen screen--light" data-screen="4" aria-label="O que és">
+        <div class="screen__content">
+          <h2 class="screen__title">O que és, de verdade.</h2>
+
+          <div class="truth">
+            <p class="truth__line">Tu ris, mas sentes.</p>
+            <p class="truth__line">Ajudas mesmo cansada.</p>
+            <p class="truth__line">Escolhes leveza porque já sentiste peso.</p>
+            <p class="truth__line">Pediste pouco: honestidade e cuidado.</p>
+          </div>
+
+          <div class="screen__actions">
+            <button class="btn btn--primary" type="button" data-next>Avançar</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- TELA 4B (extra, diferente) -->
+      <section class="screen screen--morina" data-screen="4b" aria-label="Morina">
+        <div class="screen__content">
+          <h2 class="screen__title">Morina não é só riso.</h2>
+
+          <div class="morinaBlock">
+            <p class="morinaBlock__line">Ela ri porque sente.</p>
+            <p class="morinaBlock__line">Ajuda porque se importa.</p>
+            <p class="morinaBlock__line">E às vezes… só queria ser cuidada também.</p>
+          </div>
+
+          <div class="screen__actions">
+            <button class="btn btn--primary" type="button" data-next>Continuar</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- TELA 5 -->
+      <section class="screen screen--soft" data-screen="5" aria-label="Últimas respostas">
+        <div class="screen__content">
+          <h2 class="screen__title">Só mais um bocadinho.</h2>
+          <p class="screen__subtitle">Se quiseres, responde. Se não, segue.</p>
+
+          <form class="mini" id="miniForm">
+            <label class="mini__field">
+              <span class="mini__label">O que te faz sentir segura?</span>
+              <input class="mini__input" type="text" name="segura" placeholder="(curto, do teu jeito)" />
+            </label>
+
+            <label class="mini__field">
+              <span class="mini__label">O silêncio confortável existe pra ti?</span>
+              <input class="mini__input" type="text" name="silencio" placeholder="sim, não, às vezes..." />
+            </label>
+
+            <div class="screen__actions screen__actions--split">
+              <button class="btn btn--ghost" type="button" data-skip>Pular</button>
+              <button class="btn btn--primary" type="button" data-next>Continuar</button>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <!-- TELA 6 -->
+      <section class="screen screen--gift" data-screen="6" aria-label="Presente final">
+        <div class="screen__content">
+          <h2 class="screen__title">Chegaste.</h2>
+          <p class="screen__subtitle">Agora é só abrir.</p>
+
+          <div class="giftZone" id="giftZone">
+            <button class="gift gift--runner" type="button" id="openGift">
+              🎁 Abrir presente
+            </button>
+            <p class="giftHint" id="giftHint">tenta apanhar 😼</p>
+          </div>
+
+          <article class="letter" id="letter" hidden aria-label="Carta">
+            <h3 class="letter__title">Para Morina</h3>
+
+            <p class="letter__p">
+              Hoje eu só queria que tu soubesses uma coisa: eu vejo-te.
+            </p>
+
+            <p class="letter__p">
+              Tu ris, tu ajudas, tu segues… e mesmo assim, continuas a ser real.
+              Honestidade e cuidado. Foi isso que tu pediste ao mundo, mesmo sem dizer muito.
+            </p>
+
+            <!-- Versículo -->
+            <blockquote class="verse" id="verse" aria-label="Versículo">
+              “O Senhor é o meu pastor; nada me faltará.”<br>
+              <small>Salmos 23:1</small>
+            </blockquote>
+
+            <p class="letter__p letter__p--end">
+              Hoje é teu aniversário. Mas ser tu já é raro todos os dias.
+            </p>
+
+            <p class="letter__sig">🤍</p>
+
+            <!-- Resgatar presente -->
+            <div class="letter__actions" hidden id="redeemWrap">
+              <a class="btn btn--primary" id="redeemGift" href="#">
+                Resgatar presente
+              </a>
+            </div>
+          </article>
+        </div>
+      </section>
+
+    </section>
+  </main>
+
+  <footer class="footer" aria-label="Navegação">
+    <button class="btn btn--ghost" type="button" id="backBtn">Voltar</button>
+  </footer>
+
+  <!-- 🎵 Música de fundo (toca via clique no botão Som) -->
+  <audio id="bgMusic" loop preload="auto">
+    <source src="assets/audio/morina.mp3" type="audio/mpeg" />
+  </audio>
+
+  <script src="assets/js/state.js" defer></script>
+  <script src="assets/js/flow.js" defer></script>
+  <script src="assets/js/effects.js" defer></script>
+  <script src="assets/js/sky.js" defer></script>
+</body>
+</html>
